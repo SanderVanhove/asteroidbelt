@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Things/Player/Player.png" type="Texture" id=1]
+[ext_resource path="res://Things/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Things/Player/Truster.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.01157
+height = 11.5106
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Visual"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+texture = ExtResource( 1 )
+
+[node name="TrusterSprite" type="Sprite" parent="Visual"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+position = Vector2( 0, 16 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2.43475 )
+shape = SubResource( 1 )
+
+[node name="FirePoint" type="Node2D" parent="."]
+position = Vector2( 0, -15 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TrusterFlareTween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
