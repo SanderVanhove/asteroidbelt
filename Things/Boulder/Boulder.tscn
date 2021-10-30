@@ -4,7 +4,9 @@
 [ext_resource path="res://Things/Boulder/Boulder.gd" type="Script" id=2]
 [ext_resource path="res://Utils/WrapAround.gd" type="Script" id=3]
 
-[node name="Boulder" type="RigidBody2D"]
+[node name="Boulder" type="RigidBody2D" groups=[
+"boulder",
+]]
 gravity_scale = 0.0
 linear_damp = 0.0
 angular_damp = 0.0
@@ -22,3 +24,4 @@ polygon = PoolVector2Array( -19.9081, -40.2053, 2.03696, -26.7551, 20.9145, -37.
 [node name="WrapAround" type="Node" parent="."]
 script = ExtResource( 3 )
 margin = 50
+is_rigid_body = true

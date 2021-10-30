@@ -41,3 +41,9 @@ playback/repeat = true
 [node name="WrapAround" type="Node" parent="."]
 script = ExtResource( 4 )
 margin = 20
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

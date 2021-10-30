@@ -17,6 +17,8 @@ onready var _truster_sprite: Sprite = $Visual/TrusterSprite
 onready var _tween: Tween = $Tween
 onready var _truster_flare_tween: Tween = $TrusterFlareTween
 onready var _visuals: Node2D = $Visual
+onready var _fire_timer: Timer = $FireTimer
+onready var _wrap_around = $WrapAround
 
 
 func _ready() -> void:
@@ -82,12 +84,15 @@ func handle_truster_animation() -> void:
 		_tween.start()
 
 
-
-
 func handle_firing() -> void:
 	if not Input.is_action_just_pressed("fire"):
 		return
 
+	fire()
+	_fire_timer.start()
+
+
+func fire() -> void:
 	var bullet: Bullet = BulletClass.instance()
 	bullet.global_transform = _fire_point.global_transform
 	get_parent().add_child(bullet)
@@ -95,3 +100,11 @@ func handle_firing() -> void:
 	_tween.interpolate_property(_visuals, "scale", _visuals.scale, Vector2(.8, .8), .05)
 	_tween.interpolate_property(_visuals, "scale", Vector2(.8, .8), Vector2.ONE, .4, Tween.TRANS_SINE, Tween.EASE_OUT, .05)
 	_tween.start()
+
+
+func _on_FireTimer_timeout() -> void:
+	if not Input.is_action_pressed("fire"):
+		return
+
+	fire()
+	_fire_timer.start()
