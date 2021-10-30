@@ -34,7 +34,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 5, 0, 0, 0.8 ), Color( 1, 0, 0, 0 ) ]
+"values": [ Color( 5, 0, 0, 0.537255 ), Color( 1, 0, 0, 0 ) ]
 }
 
 [node name="CollisionParticles" type="CPUParticles2D"]

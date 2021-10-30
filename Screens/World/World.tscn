@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Things/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Things/Boulder/Boulder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Screens/World/World.gd" type="Script" id=3]
 
 [sub_resource type="Shader" id=1]
@@ -62,9 +61,7 @@ position = Vector2( 500.435, 287.675 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="Boulder" parent="." instance=ExtResource( 2 )]
-position = Vector2( 187.012, 338.93 )
+[node name="BoulderTimer" type="Timer" parent="."]
+wait_time = 8.0
 
-[node name="Boulder2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 773.707, 251.119 )
-is_small = true
+[connection signal="timeout" from="BoulderTimer" to="." method="_on_BoulderTimer_timeout"]

@@ -1,6 +1,7 @@
 extends RigidBody2D
 class_name Boulder
 
+signal cracked(position, is_small)
 
 var CollisionParticlesClass = preload("res://Things/Boulder/CollisionParticles.tscn")
 
@@ -26,11 +27,11 @@ var initial_impulse: Vector2
 
 onready var _wrap_around: WrapAround = $WrapAround
 onready var _sprite: Sprite = $Visual/Sprite
+onready var _large_collision_shape: CollisionPolygon2D = $CollisionPolygon2D
 
 
 func _ready() -> void:
 	is_hit = is_small
-	#_sprite.self_modulate = Color.red
 
 	randomize()
 
@@ -39,13 +40,18 @@ func _ready() -> void:
 	rotate(randf())
 	angular_velocity = randf() * 5
 
-	if is_small: _wrap_around.margin = 20
+	if is_small:
+		_wrap_around.margin = 20
+		_large_collision_shape.queue_free()
+		_sprite.self_modulate = Color(1, .2, 0)
 
 	linear_velocity = Vector2.ZERO
 	apply_impulse(Vector2(0, 0), Vector2(
 		rand_range(-300, 300),
 		rand_range(-300, 300)
 	).clamped(MAX_SPEED))
+
+	bounce = .5
 
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
@@ -58,14 +64,10 @@ func got_hit(hitting_object: Node2D) -> void:
 	if is_hit:
 		var collision_particles = CollisionParticlesClass.instance()
 		collision_particles.global_transform = global_transform
-		get_parent().add_child(collision_particles)
 		if is_small: collision_particles.scale *= .5
+		get_parent().add_child(collision_particles)
 
-		if not is_small:
-			for i in range(randi() % 2 + 2):
-				var new_boulder: Boulder = self.duplicate()
-				new_boulder.is_small = true
-				get_parent().add_child(new_boulder)
+		emit_signal("cracked", is_small, position)
 
 		queue_free()
 
@@ -75,3 +77,11 @@ func got_hit(hitting_object: Node2D) -> void:
 
 func _on_CollisionTimer_timeout() -> void:
 	set_collision_layer_bit(0, true)
+
+
+func _on_Boulder_body_entered(body: Node) -> void:
+	if not body.is_in_group("player"):
+		return
+
+	body.hit(self)
+	got_hit(body)

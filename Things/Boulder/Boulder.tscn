@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Things/Boulder/Big_Boulder.png" type="Texture" id=1]
+[ext_resource path="res://Things/Boulder/Small_boulder.png" type="Texture" id=1]
 [ext_resource path="res://Things/Boulder/Boulder.gd" type="Script" id=2]
 [ext_resource path="res://Utils/WrapAround.gd" type="Script" id=3]
 
@@ -9,6 +9,9 @@
 ]]
 collision_layer = 0
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+can_sleep = false
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 2 )
@@ -30,5 +33,12 @@ polygon = PoolVector2Array( -19.9081, -40.2053, 2.03696, -26.7551, 20.9145, -37.
 
 [node name="CollisionTimer" type="Timer" parent="."]
 wait_time = 0.2
+one_shot = true
+autostart = true
 
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -10.437, -20.2958, 0.523193, -15.2577, 10.5111, -18.2629, 24.7416, 0.740616, 12.4556, 20.9815, -11.2325, 21.1583, -25.021, 6.39747, -20.2481, -11.1918 )
+
+[connection signal="body_entered" from="." to="." method="_on_Boulder_body_entered"]
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]

@@ -12,7 +12,9 @@ height = 11.5106
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 5, 0.59, 0, 1, 1, 1, 1, 0 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 2 )
 
 [node name="Visual" type="Node2D" parent="."]
@@ -57,7 +59,12 @@ local_coords = false
 emission_shape = 1
 emission_sphere_radius = 4.87
 gravity = Vector2( 0, 0 )
-scale_amount = 2.0
+scale_amount = 3.0
 color_ramp = SubResource( 2 )
 
+[node name="UltraTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+[connection signal="timeout" from="UltraTimer" to="." method="_on_UltraTimer_timeout"]

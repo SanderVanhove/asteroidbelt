@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ascii.png-c07b2623dcdff24581755d75ddb2b91c.stex"
+path="res://.import/splash_screen.png-dde17b8095df166c046b04096cc9fa91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screens/World/ascii.png"
-dest_files=[ "res://.import/ascii.png-c07b2623dcdff24581755d75ddb2b91c.stex" ]
+source_file="res://Screens/Splash/splash_screen.png"
+dest_files=[ "res://.import/splash_screen.png-dde17b8095df166c046b04096cc9fa91.stex" ]
 
 [params]
 
