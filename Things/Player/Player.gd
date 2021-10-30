@@ -9,6 +9,8 @@ const BulletClass = preload("res://Things/Bullet/Bullet.tscn")
 const TURN_SPEED: float = 5.0
 const ACCELETATION: float = 600.0
 const MAX_SPEED: float = 250.0
+const NORMAL_COLOR: Color = Color("00D5FF")
+const TURBO_COLOR: Color = Color("F460FF")
 
 
 var _movement: Vector2 = Vector2.ZERO
@@ -24,11 +26,13 @@ onready var _visuals: Node2D = $Visual
 onready var _fire_timer: Timer = $FireTimer
 onready var _wrap_around = $WrapAround
 onready var _ultra_timer: Timer = $UltraTimer
+onready var _ship_sprite: Sprite = $Visual/Sprite
 
 
 func _ready() -> void:
 	_truster_sprite.modulate.a = 0
 	_truster_sprite.scale.y = 0
+	_ship_sprite.modulate = NORMAL_COLOR
 
 
 func _process(delta: float) -> void:
@@ -48,6 +52,9 @@ func handle_super_power() -> void:
 	emit_signal("num_lives_changed", _num_lives)
 
 	_fire_timer.wait_time = .1
+
+	_tween.interpolate_property(_ship_sprite, "modulate", _ship_sprite.modulate, TURBO_COLOR, .2)
+	_tween.start()
 
 
 func handle_turning(delta: float) -> void:
@@ -155,3 +162,5 @@ func _on_FireTimer_timeout() -> void:
 
 func _on_UltraTimer_timeout() -> void:
 	_fire_timer.wait_time = .3
+	_tween.interpolate_property(_ship_sprite, "modulate", _ship_sprite.modulate, NORMAL_COLOR, .2)
+	_tween.start()

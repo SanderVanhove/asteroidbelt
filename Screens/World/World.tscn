@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Things/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/World/World.gd" type="Script" id=3]
@@ -30,6 +30,8 @@ void fragment()
 shader = SubResource( 1 )
 shader_param/amount = 350
 
+[sub_resource type="DynamicFont" id=4]
+
 [sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
@@ -51,6 +53,15 @@ material = SubResource( 2 )
 margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 4 )
+text = "00:00"
 __meta__ = {
 "_edit_use_anchors_": false
 }

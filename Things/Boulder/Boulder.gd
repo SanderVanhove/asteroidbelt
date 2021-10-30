@@ -28,6 +28,7 @@ var initial_impulse: Vector2
 onready var _wrap_around: WrapAround = $WrapAround
 onready var _sprite: Sprite = $Visual/Sprite
 onready var _large_collision_shape: CollisionPolygon2D = $CollisionPolygon2D
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -52,6 +53,9 @@ func _ready() -> void:
 	).clamped(MAX_SPEED))
 
 	bounce = .5
+
+	_sprite.modulate.a = 0
+	_animation_player.play("appear")
 
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
