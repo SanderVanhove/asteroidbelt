@@ -4,6 +4,7 @@ class_name Boulder
 signal cracked(position, is_small)
 
 var CollisionParticlesClass = preload("res://Things/Boulder/CollisionParticles.tscn")
+var ExtraLifeClass = preload("res://Things/ExtraLife/ExtraLife.tscn")
 
 
 var big_sprites: Array = [
@@ -72,6 +73,11 @@ func got_hit(hitting_object: Node2D) -> void:
 		get_parent().add_child(collision_particles)
 
 		emit_signal("cracked", is_small, position)
+
+		if not is_small and randf() < .1:
+			var extra_life = ExtraLifeClass.instance()
+			extra_life.global_position = global_position
+			get_parent().add_child(extra_life)
 
 		queue_free()
 

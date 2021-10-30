@@ -4,7 +4,7 @@ extends Node2D
 var BoulderClass = preload("res://Things/Boulder/Boulder.tscn")
 onready var screen_size: Vector2 = get_viewport().size
 
-const MIN_BOULDER_TIME: float = 3.5
+const MIN_BOULDER_TIME: float = 4.0
 
 
 var large_boulder_prob: float = 1
@@ -65,6 +65,8 @@ func _on_BoulderTimer_timeout() -> void:
 	spawn_random_boulder()
 
 	if time > 60 and randi() % 2:
+		spawn_random_boulder()
+	if time > 120 and randi() % 2:
 		spawn_random_boulder()
 
 	_boulder_timer.wait_time *= .95

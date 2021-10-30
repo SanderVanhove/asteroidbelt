@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 
 
 func handle_super_power() -> void:
-	if not Input.is_action_just_pressed("ultra_power") or _num_lives <= 1:
+	if not Input.is_action_just_pressed("ultra_power") or _num_lives <= 1 or not _ultra_timer.is_stopped():
 		return
 
 	_ultra_timer.start()
@@ -173,3 +173,8 @@ func _on_UltraTimer_timeout() -> void:
 	_fire_timer.wait_time = .3
 	_tween.interpolate_property(_ship_sprite, "modulate", _ship_sprite.modulate, NORMAL_COLOR, .2)
 	_tween.start()
+
+
+func add_life():
+	_num_lives += 1
+	emit_signal("num_lives_changed", _num_lives)
