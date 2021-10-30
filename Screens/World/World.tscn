@@ -4,7 +4,7 @@
 [ext_resource path="res://Things/Boulder/Boulder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Screens/World/World.gd" type="Script" id=3]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/pixelate
@@ -27,11 +27,11 @@ void fragment()
 	COLOR = text;
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/amount = 350
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 4.51
@@ -45,7 +45,7 @@ script = ExtResource( 3 )
 position = Vector2( 500.435, 287.675 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 1, 1, 1, 0 )
@@ -54,7 +54,7 @@ __meta__ = {
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 3 )
 
 [node name="Boulder" parent="." instance=ExtResource( 2 )]
 position = Vector2( 187.012, 338.93 )
