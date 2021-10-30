@@ -45,10 +45,9 @@ glow_blend_mode = 1
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 500.435, 287.675 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 2 )
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -57,8 +56,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 500.435, 287.675 )
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
 [node name="Boulder" parent="." instance=ExtResource( 2 )]
 position = Vector2( 187.012, 338.93 )
+
+[node name="Boulder2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 773.707, 251.119 )
+is_small = true

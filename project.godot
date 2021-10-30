@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Boulder",
+"language": "GDScript",
+"path": "res://Things/Boulder/Boulder.gd"
+}, {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://Things/Bullet/Bullet.gd"
+}, {
+"base": "CPUParticles2D",
+"class": "CollisionParticles",
+"language": "GDScript",
+"path": "res://Things/Bullet/CollisionParticles.gd"
 }, {
 "base": "Node",
 "class": "WrapAround",
@@ -20,7 +30,9 @@ _global_script_classes=[ {
 "path": "res://Utils/WrapAround.gd"
 } ]
 _global_script_class_icons={
+"Boulder": "",
 "Bullet": "",
+"CollisionParticles": "",
 "WrapAround": ""
 }
 

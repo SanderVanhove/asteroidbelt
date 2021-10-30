@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Things/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Things/Player/Player.gd" type="Script" id=2]
@@ -8,6 +8,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.01157
 height = 11.5106
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 5, 0.59, 0, 1, 1, 1, 1, 0 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -45,5 +48,16 @@ margin = 20
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="TrusterParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 20 )
+z_index = -1
+emitting = false
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 4.87
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+color_ramp = SubResource( 2 )
 
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

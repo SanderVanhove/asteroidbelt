@@ -16,6 +16,7 @@ onready var _fire_point: Node2D = $FirePoint
 onready var _truster_sprite: Sprite = $Visual/TrusterSprite
 onready var _tween: Tween = $Tween
 onready var _truster_flare_tween: Tween = $TrusterFlareTween
+onready var _truster_particles: CPUParticles2D = $TrusterParticles
 onready var _visuals: Node2D = $Visual
 onready var _fire_timer: Timer = $FireTimer
 onready var _wrap_around = $WrapAround
@@ -69,6 +70,8 @@ func handle_truster_animation() -> void:
 		_tween.interpolate_property(_truster_sprite, "scale:y", _truster_sprite.scale.y, 1, time)
 		_tween.start()
 
+		_truster_particles.emitting = true
+
 		yield(get_tree().create_timer(time), "timeout")
 
 		if not Input.is_action_pressed("ui_up"):
@@ -82,6 +85,8 @@ func handle_truster_animation() -> void:
 		_tween.interpolate_property(_truster_sprite, "modulate:a", _truster_sprite.modulate.a, 0, time)
 		_tween.interpolate_property(_truster_sprite, "scale:y", _truster_sprite.scale.y, 0, time)
 		_tween.start()
+
+		_truster_particles.emitting = false
 
 
 func handle_firing() -> void:
