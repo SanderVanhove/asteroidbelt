@@ -4,6 +4,7 @@ signal num_lives_changed(num_lives)
 
 
 const BulletClass = preload("res://Things/Bullet/Bullet.tscn")
+const CollisionParticlesClass = preload("res://Things/Player/CollisionParticlesPlayer.tscn")
 
 
 const TURN_SPEED: float = 5.0
@@ -33,6 +34,8 @@ func _ready() -> void:
 	_truster_sprite.modulate.a = 0
 	_truster_sprite.scale.y = 0
 	_ship_sprite.modulate = NORMAL_COLOR
+
+	emit_signal("num_lives_changed", _num_lives)
 
 
 func _process(delta: float) -> void:
@@ -150,6 +153,12 @@ func hit(hitting_object) -> void:
 
 	emit_signal("num_lives_changed", _num_lives)
 	print("Lives: ", _num_lives)
+
+	if _num_lives <= 0:
+		var collision_particles = CollisionParticlesClass.instance()
+		collision_particles.global_transform = global_transform
+		get_parent().add_child(collision_particles)
+		queue_free()
 
 
 func _on_FireTimer_timeout() -> void:

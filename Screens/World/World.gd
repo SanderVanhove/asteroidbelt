@@ -9,11 +9,15 @@ const MIN_BOULDER_TIME: float = 3.5
 
 var large_boulder_prob: float = 1
 var time: float = 0
+var should_time: bool = true
 
 
 onready var _boulder_timer: Timer = $BoulderTimer
+onready var _death_timer: Timer = $DeathTimer
 
-onready var _timer_label: Label = $CanvasLayer/TimeLabel
+onready var _timer_label: Label = $CanvasLayer/UI/TimeLabel
+onready var _end_time_label: Label = $CanvasLayer/UI/Retry/VBoxContainer/HBoxContainer/Label3
+onready var _retry_screen: Control = $CanvasLayer/UI/Retry
 
 
 func _ready() -> void:
@@ -29,6 +33,9 @@ func _process(delta: float) -> void:
 
 
 func handle_time(delta: float) -> void:
+	if not should_time:
+		return
+
 	time += delta
 
 	var minutes := time / 60
@@ -89,3 +96,20 @@ func spawn_random_boulder() -> void:
 
 
 	spawn_boulder(pos, is_small)
+
+
+func _on_Player_num_lives_changed(num_lives) -> void:
+	if num_lives > 0:
+		return
+
+	should_time = false
+	_death_timer.start()
+	_end_time_label.text = _timer_label.text
+
+
+func _on_DeathTimer_timeout() -> void:
+	_retry_screen.show()
+
+
+func _on_Button_pressed() -> void:
+	get_tree().change_scene("res://Screens/World/World.tscn")
