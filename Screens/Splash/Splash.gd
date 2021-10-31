@@ -12,4 +12,4 @@ func _ready():
 		tween.start()
 
 		yield(tween, "tween_all_completed")
-	get_tree().change_scene("res://Screens/World/World.tscn")
+	get_tree().change_scene("res://Screens/Menu/Menu.tscn")
