@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/extra_life.WAV-7b5b1e0c1b0b48507a833a5e20f1a286.sample"
+
+[deps]
+
+source_file="res://Things/Player/extra_life.WAV"
+dest_files=[ "res://.import/extra_life.WAV-7b5b1e0c1b0b48507a833a5e20f1a286.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Things/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Things/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Things/Player/Truster.png" type="Texture" id=3]
 [ext_resource path="res://Utils/WrapAround.gd" type="Script" id=4]
+[ext_resource path="res://Things/Player/laser.wav" type="AudioStream" id=5]
+[ext_resource path="res://Things/Player/boulder_hit.wav" type="AudioStream" id=6]
+[ext_resource path="res://Things/Player/engine_rumble.wav" type="AudioStream" id=7]
+[ext_resource path="res://Things/Player/engine_start.wav" type="AudioStream" id=8]
+[ext_resource path="res://Things/Player/extra_life.WAV" type="AudioStream" id=9]
+[ext_resource path="res://Things/Player/turbo.wav" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.01157
@@ -11,6 +17,15 @@ height = 11.5106
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 5, 0.59, 0, 1, 1, 1, 1, 0 )
+
+[sub_resource type="AudioStreamRandomPitch" id=3]
+audio_stream = ExtResource( 5 )
+
+[sub_resource type="AudioStreamRandomPitch" id=4]
+audio_stream = ExtResource( 6 )
+
+[sub_resource type="AudioStreamRandomPitch" id=5]
+audio_stream = ExtResource( 9 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -65,6 +80,35 @@ color_ramp = SubResource( 2 )
 [node name="UltraTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="ShotAudio" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 3 )
+volume_db = -1.0
+bus = "Sound"
+
+[node name="BoulderHit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 4 )
+volume_db = 5.0
+bus = "Sound"
+
+[node name="EngineStart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -7.0
+bus = "Sound"
+
+[node name="EngineRumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = -7.0
+bus = "Sound"
+
+[node name="ExtraLife" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 5 )
+bus = "Sound"
+
+[node name="Turbo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -7.0
+bus = "Sound"
 
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
 [connection signal="timeout" from="UltraTimer" to="." method="_on_UltraTimer_timeout"]

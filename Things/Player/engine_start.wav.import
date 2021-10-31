@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/engine_start.wav-6c32486f8b941aed02946442800e2050.sample"
+
+[deps]
+
+source_file="res://Things/Player/engine_start.wav"
+dest_files=[ "res://.import/engine_start.wav-6c32486f8b941aed02946442800e2050.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

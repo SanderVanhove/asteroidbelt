@@ -90,6 +90,8 @@ func _on_CollisionTimer_timeout() -> void:
 
 
 func _on_Boulder_body_entered(body: Node) -> void:
+	if body.is_in_group("boulder"):
+		$BoulderHit.play()
 	if not body.is_in_group("player"):
 		return
 

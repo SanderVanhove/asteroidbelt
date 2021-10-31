@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion2.wav-bd7f5532c5dea0274fb4cd4acf4d7876.sample"
+
+[deps]
+
+source_file="res://Things/Boulder/explosion2.wav"
+dest_files=[ "res://.import/explosion2.wav-bd7f5532c5dea0274fb4cd4acf4d7876.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

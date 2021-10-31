@@ -59,6 +59,8 @@ func handle_super_power() -> void:
 	_tween.interpolate_property(_ship_sprite, "modulate", _ship_sprite.modulate, TURBO_COLOR, .2)
 	_tween.start()
 
+	$Turbo.play()
+
 
 func handle_turning(delta: float) -> void:
 	var turn_speed: float = 0
@@ -88,6 +90,7 @@ func handle_trust(delta: float) -> void:
 	_movement = move_and_slide(_movement)
 
 	handle_truster_animation()
+	handle_engine_sound()
 
 
 func handle_truster_animation() -> void:
@@ -116,6 +119,16 @@ func handle_truster_animation() -> void:
 		_truster_particles.emitting = false
 
 
+func handle_engine_sound() -> void:
+	if Input.is_action_just_pressed("ui_up"):
+		$EngineStart.play()
+		yield($EngineStart, "finished")
+		$EngineRumble.play()
+	elif Input.is_action_just_released("ui_up"):
+		$EngineStart.stop()
+		$EngineRumble.stop()
+
+
 func handle_firing() -> void:
 	if not Input.is_action_just_pressed("fire"):
 		return
@@ -135,6 +148,8 @@ func fire() -> void:
 	_tween.interpolate_property(_visuals, "scale", Vector2(.8, .8), Vector2.ONE, .4, Tween.TRANS_SINE, Tween.EASE_OUT, .05)
 	_tween.start()
 
+	$ShotAudio.play()
+
 
 func spawn_bullet(angle: float) -> void:
 	var bullet: Bullet = BulletClass.instance()
@@ -149,7 +164,7 @@ func hit(hitting_object) -> void:
 
 	_num_lives -= 1
 	_movement += (position - hitting_object.position) * 50
-
+	$BoulderHit.play()
 
 	emit_signal("num_lives_changed", _num_lives)
 	print("Lives: ", _num_lives)
@@ -178,3 +193,5 @@ func _on_UltraTimer_timeout() -> void:
 func add_life():
 	_num_lives += 1
 	emit_signal("num_lives_changed", _num_lives)
+
+	$ExtraLife.play()

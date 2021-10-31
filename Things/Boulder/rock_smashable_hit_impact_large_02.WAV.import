@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rock_smashable_hit_impact_large_02.WAV-86c09f80c34c543b2dda37c3bfebebb5.sample"
+
+[deps]
+
+source_file="res://Things/Boulder/rock_smashable_hit_impact_large_02.WAV"
+dest_files=[ "res://.import/rock_smashable_hit_impact_large_02.WAV-86c09f80c34c543b2dda37c3bfebebb5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
