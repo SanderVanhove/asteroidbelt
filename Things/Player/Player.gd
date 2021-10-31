@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal num_lives_changed(num_lives)
+signal shoots
 
 
 const BulletClass = preload("res://Things/Bullet/Bullet.tscn")
@@ -149,6 +150,8 @@ func fire() -> void:
 	_tween.start()
 
 	$ShotAudio.play()
+
+	emit_signal("shoots")
 
 
 func spawn_bullet(angle: float) -> void:

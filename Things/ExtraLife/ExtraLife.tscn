@@ -7,7 +7,7 @@
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 20.4933
+radius = 34.0616
 
 [sub_resource type="Animation" id=3]
 resource_name = "Float"

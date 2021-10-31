@@ -9,7 +9,7 @@ const MIN_BOULDER_TIME: float = 4.0
 
 var large_boulder_prob: float = 1
 var time: float = 0
-var should_time: bool = true
+var should_time: bool = false
 
 
 onready var _boulder_timer: Timer = $BoulderTimer
@@ -19,13 +19,22 @@ onready var _timer_label: Label = $CanvasLayer/UI/TimeLabel
 onready var _end_time_label: Label = $CanvasLayer/UI/Retry/VBoxContainer/HBoxContainer/Label3
 onready var _retry_screen: Control = $CanvasLayer/UI/Retry
 
+onready var _tutorial1: Tutorial = $CanvasLayer/Tutorials/Tutorial
+onready var _tutorial2: Tutorial = $CanvasLayer/Tutorials/Tutorial2
+
+onready var _camera: ShakingCamera = $Camera2D
+
 
 func _ready() -> void:
+	yield(_tutorial1.show_up(), "completed")
+	yield(_tutorial2.show_up(), "completed")
+
 	randomize()
 
 	_on_BoulderTimer_timeout()
 
 	_boulder_timer.start()
+	should_time = true
 
 
 func _process(delta: float) -> void:
@@ -54,6 +63,8 @@ func spawn_boulder(position: Vector2, is_small: bool) -> void:
 
 
 func boulder_cracked(is_small: bool, position: Vector2) -> void:
+	_camera.trigger_medium_shake()
+
 	if is_small:
 		return
 
@@ -102,11 +113,14 @@ func spawn_random_boulder() -> void:
 
 func _on_Player_num_lives_changed(num_lives) -> void:
 	if num_lives > 0:
+		if _camera:
+			_camera.trigger_medium_shake()
 		return
 
 	should_time = false
 	_death_timer.start()
 	_end_time_label.text = _timer_label.text
+	_camera.trigger_large_shake()
 
 
 func _on_DeathTimer_timeout() -> void:

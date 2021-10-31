@@ -8,7 +8,6 @@ var CollisionParticlesClass = preload("res://Things/Bullet/CollisionParticles.ts
 const SPEED: float = 10.0
 
 
-onready var _particles: CPUParticles2D = $CPUParticles2D
 onready var _tween: Tween = $Tween
 
 

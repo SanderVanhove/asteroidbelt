@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/click.ogg-2c70b718297c66e484931876cd83184c.oggstr"
+
+[deps]
+
+source_file="res://Things/Tutorial/click.ogg"
+dest_files=[ "res://.import/click.ogg-2c70b718297c66e484931876cd83184c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Things/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/alarm clock.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Things/LiveTracker/LiveTracker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Spaceship Bullet.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Screens/World/drone.wav" type="AudioStream" id=6]
+[ext_resource path="res://Things/Tutorial/Tutorial.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Things/ExtraLife/extralife.png" type="Texture" id=8]
+[ext_resource path="res://Screens/World/Camera2D.gd" type="Script" id=9]
+[ext_resource path="res://Utils/ScreenShake.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 42
@@ -245,6 +249,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tutorials" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 51.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutorial" parent="CanvasLayer/Tutorials" instance=ExtResource( 7 )]
+title = "Tutorial"
+text = "Controls:
+
+- W/S or Arrow Up/Down to accelerate and decelerate.
+- A/D or Arrow Left/Right to turn.
+- Space to shoot. Can be held down to auto-fire.
+
+Survive as long as possible!"
+
+[node name="Tutorial2" parent="CanvasLayer/Tutorials" instance=ExtResource( 7 )]
+title = "TURBO Mode"
+text = "Press N to enter TURBO Mode.
+
+This will:
+
+- Make you invincible. You will be able to smash through Asteroids.
+- Shoot 3 instead of 1 bullet at a time.
+- Increase auto-fire shooting speed 3 times.
+
+In return you have to sacrifice a life. This ideal to clear all Asteroids.
+
+Pick up           to earn extra lives."
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Tutorials/Tutorial2"]
+margin_left = 220.943
+margin_top = 404.522
+margin_right = 260.943
+margin_bottom = 444.522
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 500.435, 287.675 )
 
@@ -262,9 +309,17 @@ stream = ExtResource( 6 )
 volume_db = -5.049
 autoplay = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 300 )
+current = true
+script = ExtResource( 9 )
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 10 )]
+
 [connection signal="pressed" from="CanvasLayer/UI/Retry/VBoxContainer/Button" to="CanvasLayer/UI/Retry/VBoxContainer/Button" method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Retry/VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="num_lives_changed" from="Player" to="CanvasLayer/UI/LiveTracker" method="change_lives"]
 [connection signal="num_lives_changed" from="Player" to="." method="_on_Player_num_lives_changed"]
+[connection signal="shoots" from="Player" to="Camera2D" method="trigger_small_shake"]
 [connection signal="timeout" from="BoulderTimer" to="." method="_on_BoulderTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
